@@ -252,43 +252,6 @@ Publish the website in the LocalHost.
             align-items: center;
             gap: 4px;
         }
-
-        /* MOBILE RESPONSIVE */
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                padding: 15px;
-            }
-
-            .nav-links {
-                flex-wrap: wrap;
-                margin-top: 15px;
-                justify-content: center;
-            }
-
-            .auth {
-                margin-left: 0;
-                margin-top: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .filter-bar {
-                flex-direction: column;
-                height: auto;
-                padding: 15px;
-                gap: 10px;
-            }
-
-            .filter-dropdowns {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .grid {
-                padding: 20px 15px;
-            }
-        }
     </style>
 </head>
 <body>
