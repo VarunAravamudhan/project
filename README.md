@@ -28,196 +28,462 @@ Publish the website in the LocalHost.
 <html>
 <head>
     <title>Dribbble</title>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background: #f5f5f5;
         }
 
         .navbar {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-            padding: 18px 40px;
             background: #333;
-            color: white;
+            padding: 12px 40px;
+            min-height: 70px;
         }
 
         .logo {
+            color: white;
             font-size: 22px;
-            font-weight: bold;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-right: 40px;
         }
 
-        .navbar a {
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin-right: 25px;
+        }
+
+        .nav-links a {
             color: #bbb;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: white;
             text-decoration: none;
         }
 
-        .navbar a:hover {
+        .nav-links a.active {
+            color: white;
+            font-weight: bold;
+        }
+
+        .auth {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .auth a {
+            color: #bbb;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .auth a:hover {
             color: white;
         }
 
         .search {
-            margin-left: auto;
-            padding: 8px;
+            width: 180px;
+            height: 38px;
             border: none;
-            border-radius: 5px;
+            padding: 6px 14px;
+            border-radius: 6px;
             background: #444;
             color: white;
+            font-size: 14px;
         }
 
-        button {
-            padding: 9px 15px;
-            border-radius: 5px;
-            cursor: pointer;
+        .search::placeholder {
+            color: #888;
         }
 
-        .sign-up {
-            border: none;
-            background: #ea4c89;
-            color: white;
-        }
-
-        .learn-more {
-            border: 1px solid #666;
-            background: transparent;
-            color: white;
-        }
-
-        .hero {
+        .sub-header {
+            background: #444;
             padding: 40px 20px;
-            text-align: center;
-            background: #444;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             color: white;
+            text-align: center;
         }
 
-        .hero p {
+        .sub-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .sub-header p {
+            margin: 0 0 20px 0;
+            font-size: 15px;
             color: #ccc;
         }
 
-        .filters {
+        .sub-header-actions {
             display: flex;
-            justify-content: space-between;
-            padding: 15px 50px;
-            background: white;
+            gap: 10px;
         }
 
-        select {
-            padding: 7px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+        .learn-more {
+            padding: 10px 18px;
+            border: 1px solid #666;
+            background: transparent;
+            border-radius: 6px;
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .sign-up {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            background: #ea4c89;
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .filter-bar {
+            background: white;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            border-bottom: 1px solid #e7e7e7;
+        }
+
+        .filter-dropdowns {
+            display: flex;
+            gap: 10px;
+        }
+
+        .filter-bar select {
+            border: 1px solid #e7e7e7;
+            background: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 13px;
+            color: #333;
         }
 
         .grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
-            padding: 40px;
+            padding: 40px 40px;
         }
 
-        .card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
+        .card {
+            background: transparent;
+            border: none;
+            margin-bottom: 30px;
+        }
+
+        .card-image {
+            background: white;
             border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
 
-        .info {
+        .card-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-footer-info {
             display: flex;
             justify-content: space-between;
-            padding: 10px 2px;
-            font-size: 13px;
+            align-items: center;
+            margin-top: 10px;
+            padding: 0 2px;
         }
 
         .author {
+            display: flex;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .author-circle {
+            display: inline-flex;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #333;
+            color: white;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
             font-weight: bold;
+            margin-right: 8px;
         }
 
         .stats {
-            color: #888;
+            display: flex;
+            gap: 12px;
+            color: #999;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                margin-top: 15px;
+                justify-content: center;
+            }
+
+            .auth {
+                margin-left: 0;
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .filter-bar {
+                flex-direction: column;
+                height: auto;
+                padding: 15px;
+                gap: 10px;
+            }
+
+            .filter-dropdowns {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .grid {
+                padding: 20px 15px;
+            }
         }
     </style>
 </head>
-
 <body>
-    <header class="navbar">
-        <div class="logo">Dribbble</div>
 
-        <a href="#">Inspiration</a>
-        <a href="#">Find Work</a>
-        <a href="#">Learn Design</a>
-        <a href="#">Go Pro</a>
-
-        <input class="search" type="text" placeholder="Search shots...">
-
+<header class="navbar">
+    <div class="logo">
+        Dribbble
+    </div>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="#" class="active">Inspiration</a></li>
+            <li><a href="#">Find Work</a></li>
+            <li><a href="#">Learn Design</a></li>
+            <li><a href="#">Go Pro</a></li>
+            <li><a href="#">Hire Designers</a></li>
+        </ul>
+    </nav>
+    <div class="auth">
+        <input type="text" class="search" placeholder="Search shots...">
         <a href="#">Sign in</a>
-        <button class="sign-up">Sign up</button>
-    </header>
+        <a href="#" class="btn btn-sm sign-up">Sign up</a>
+    </div>
+</header>
 
-    <section class="hero">
-        <h1>Discover the world’s top designers & creatives</h1>
-        <p>Find and showcase creative work.</p>
-
+<section class="sub-header">
+    <h1>Discover the world’s top designers & creatives</h1>
+    <p>Dribbble is the leading destination to find & showcase creative work and home to the world's best design professionals.</p>
+    <div class="sub-header-actions">
         <button class="sign-up">Sign up</button>
         <button class="learn-more">Learn more</button>
-    </section>
+    </div>
+</section>
 
-    <section class="filters">
-        <div>
-            <select>
-                <option>Popular</option>
-                <option>Newest</option>
-            </select>
-
-            <select>
-                <option>All Shots</option>
-                <option>PC Setups</option>
-                <option>Accessories</option>
-            </select>
-        </div>
-
+<section class="filter-bar">
+    <div class="filter-dropdowns">
         <select>
-            <option>Now</option>
-            <option>This Week</option>
-            <option>This Month</option>
+            <option>Popular</option>
+            <option>Newest</option>
         </select>
-    </section>
+        <select>
+            <option>All Shots</option>
+            <option>PC Setups</option>
+            <option>Components</option>
+            <option>Accessories</option>
+        </select>
+    </div>
+    <select>
+        <option>Now</option>
+        <option>This Week</option>
+        <option>This Month</option>
+        <option>All Time</option>
+    </select>
+</section>
 
-    <main class="grid">
-        <div class="card">
-            <img src="pc1.jpg" alt="Gaming PC">
-            <div class="info">
-                <span class="author">PC Master</span>
-                <span class="stats">👁 4.2k ♥ 512</span>
+<main class="grid">
+    <div class="container-fluid">
+        <div class="row">
+            
+            <!-- Card 1 -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="pc1.jpg" alt="Gaming PC">
+                    </div>
+                    <div class="card-footer-info">
+                        <div class="author">
+                            <span class="author-circle">P</span>
+                            PC Master
+                        </div>
+                        <div class="stats">
+                            <span class="stat-item">👁 4.2k</span>
+                            <span class="stat-item">♥ 512</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="card">
-            <img src="pc2.jpg" alt="Laptop">
-            <div class="info">
-                <span class="author">Tech Byte</span>
-                <span class="stats">👁 3.6k ♥ 436</span>
+            <!-- Card 2 -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="pc2.jpg" alt="Laptop">
+                    </div>
+                    <div class="card-footer-info">
+                        <div class="author">
+                            <span class="author-circle">T</span>
+                            Tech Byte
+                        </div>
+                        <div class="stats">
+                            <span class="stat-item">👁 3.6k</span>
+                            <span class="stat-item">♥ 436</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="card">
-            <img src="pc3.jpg" alt="Monitor">
-            <div class="info">
-                <span class="author">Pixel Setup</span>
-                <span class="stats">👁 2.9k ♥ 312</span>
+            <!-- Card 3 -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="pc3.jpg" alt="Monitor">
+                    </div>
+                    <div class="card-footer-info">
+                        <div class="author">
+                            <span class="author-circle">P</span>
+                            Pixel Setup
+                        </div>
+                        <div class="stats">
+                            <span class="stat-item">👁 2.9k</span>
+                            <span class="stat-item">♥ 312</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="card">
-            <img src="pc4.jpg" alt="Keyboard">
-            <div class="info">
-                <span class="author">Keys & Clicks</span>
-                <span class="stats">👁 3.2k ♥ 408</span>
+            <!-- Card 4 -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="pc4.jpg" alt="Keyboard">
+                    </div>
+                    <div class="card-footer-info">
+                        <div class="author">
+                            <span class="author-circle">K</span>
+                            Keys & Clicks
+                        </div>
+                        <div class="stats">
+                            <span class="stat-item">👁 3.2k</span>
+                            <span class="stat-item">♥ 408</span>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <!-- Card 5 -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="pc5.jpg" alt="Mouse">
+                    </div>
+                    <div class="card-footer-info">
+                        <div class="author">
+                            <span class="author-circle">G</span>
+                            Gear Lab
+                        </div>
+                        <div class="stats">
+                            <span class="stat-item">👁 3.7k</span>
+                            <span class="stat-item">♥ 298</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="pc14.jpg" alt="Motherboard">
+                    </div>
+                    <div class="card-footer-info">
+                        <div class="author">
+                            <span class="author-circle">B</span>
+                            Board Builder
+                        </div>
+                        <div class="stats">
+                            <span class="stat-item">👁 2.3k</span>
+                            <span class="stat-item">♥ 243</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="pc16.jpg" alt="Gaming Chair">
+                    </div>
+                    <div class="card-footer-info">
+                        <div class="author">
+                            <span class="author-circle">C</span>
+                            Comfort Gear
+                        </div>
+                        <div class="stats">
+                            <span class="stat-item">👁 2.1k</span>
+                            <span class="stat-item">♥ 187</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </main>
+    </div>
+</main>
+
 </body>
 </html>
 ~~~
