@@ -143,7 +143,8 @@ Publish the website in the LocalHost.
 
 # OUTPUT:
 
-![alt text](image.png)
+<img width="1471" height="897" alt="image" src="https://github.com/user-attachments/assets/4a822ef8-9cee-45e3-80b3-77724efb662c" />
+
 
 # RESULT:
 The Project for responsive web design using Bootstrap is completed successfully.
